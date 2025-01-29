@@ -46,8 +46,8 @@
         Search
       </button>
     </form>
+</section>
 
-    <!-- Display Search Results Only When Search Query Exists -->
 {% if request.GET.search %}
 <div class="mt-8">
   <h3 class="text-xl font-semibold text-center mb-4">Search Results for "{{ request.GET.search }}"</h3>
@@ -63,6 +63,7 @@
   </div>
 </div>
 {% else %}
+
 <!-- Upcoming Event Section -->
 <section class="container mx-auto p-8"> 
   <h2 class="text-2xl font-bold mb-4 text-center">Upcoming Events</h2>
@@ -171,15 +172,17 @@
 
 
 <!-- Footer -->
-<footer class="bg-blue-500 text-white py-12">
-  <div class="container mx-auto text-center">
-    <p>&copy; 2025 Event Management System. All Rights Reserved.</p>
-    <p class="mt-2">
-      Follow us on: <a href="#" class="hover:underline">Facebook</a> |
-      <a href="#" class="hover:underline">Twitter</a> |
-      <a href="#" class="hover:underline">Instagram</a>
-    </p>
-  </div>
-</footer>
+  <footer class="bg-blue-500 text-white py-12">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Event Management System. All Rights Reserved.</p>
+      <p class="mt-2">
+        Follow us on: <a href="#" class="hover:underline">Facebook</a> |
+        <a href="#" class="hover:underline">Twitter</a> |
+        <a href="#" class="hover:underline">Instagram</a>
+      </p>
+    </div>
+  </footer>
+
+
 
 {% endblock %}
