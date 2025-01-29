@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-8 bg-gray-100">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Event List</h2>
+
+    <!-- Filter Form -->
+    <form method="get" class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label for="category" class="block text-gray-700 font-semibold mb-2">Category:</label>
+                <input type="text" name="category" id="category" value="{{ request.GET.category }}" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            </div>
+            <div>
+                <label for="start_date" class="block text-gray-700 font-semibold mb-2">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            </div>
+            <div>
+                <label for="end_date" class="block text-gray-700 font-semibold mb-2">End Date:</label>
+                <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            </div>
+        </div>
+        <div class="mt-4 text-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
+                Filter
+            </button>
+        </div>
+    </form>
+
+    <!-- Total Participants -->
+    <h3 class="text-xl font-semibold text-gray-700 mb-4">Total Participants: <span class="text-blue-500">{{ total_participants }}</span></h3>
+
+    <!-- Event List -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <ul class="space-y-4">
+            {% for event in events %}
+                <li class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800">{{ event.name }}</h4>
+                            <p class="text-sm text-gray-600">Category: {{ event.category.name }}</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-700 font-semibold">Participants:</span>
+                            <span class="text-blue-500 font-bold">{{ event.participants.count }}</span>
+                        </div>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="text-center text-gray-500">No events found matching your criteria.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

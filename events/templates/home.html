@@ -1,0 +1,185 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-blue-500 text-white h-screen">
+  <div class="absolute inset-0">
+    <img
+      src="{% static 'images/hero-background.jpeg' %}"
+      alt="Event Background"
+      class="w-full h-full object-cover opacity-75"
+    />
+  </div>
+  <div class="relative z-10 container mx-auto text-center py-32">
+    <h1 class="text-5xl font-bold mb-6">Discover Amazing Events</h1>
+    <p class="text-xl mb-8">Find, plan, and manage events with ease.</p>
+    <a
+      href="#"
+      class="bg-white text-blue-500 px-6 py-3 rounded-lg shadow-md hover:bg-gray-200 transition"
+      >Explore Events</a
+    >
+  </div>
+</section>
+
+<!-- Search Section -->
+<section class="bg-gray-100 py-10">
+  <div class="container mx-auto">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold">Search for Events</h2>
+      <p class="text-gray-600">Find events by name, date, or location</p>
+    </div>
+    <form
+      action="{% url 'events:home' %}"
+      method="get"
+      class="flex justify-center items-center space-x-4"
+    >
+      <input
+        type="text"
+        name="search"
+        placeholder="Search for events..."
+        value="{{ request.GET.search }}" 
+        class="w-full md:w-1/2 lg:w-1/3 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300 transition duration-300 ease-in-out"
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out"
+      >
+        Search
+      </button>
+    </form>
+
+    <!-- Display Search Results Only When Search Query Exists -->
+{% if request.GET.search %}
+<div class="mt-8">
+  <h3 class="text-xl font-semibold text-center mb-4">Search Results for "{{ request.GET.search }}"</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for event in events %}
+      <div class="bg-white shadow-md p-4 rounded-lg">
+        <h4 class="text-lg font-bold">{{ event.name }}</h4>
+        <img src="{{ event.image.url }}" class="w-full h-48 object-cover" alt="{{ event.name }}">
+        <p class="text-gray-600">{{ event.date }}</p>
+        <p class="text-gray-800">{{ event.location }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<!-- Upcoming Event Section -->
+<section class="container mx-auto p-8"> 
+  <h2 class="text-2xl font-bold mb-4 text-center">Upcoming Events</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+    {% for event in events %}
+      <div class="rounded overflow-hidden shadow-md bg-white">
+        <img src="{{ event.image.url }}" class="w-full h-48 object-cover" alt="{{ event.name }}">
+        <div class="px-6 py-4">
+          <h3 class="text-xl font-semibold mb-2"><strong class="text-gray-700 ml-2">Title:</strong> {{ event.name }}</h3>
+          <p class="text-gray-700 mb-2 px-2">{{ event.description }}</p>
+          <div class="flex items-center mb-2">
+            <strong class="text-gray-700 ml-2">location:</strong>
+            <p class="text-gray-700 ml-2">{{ event.location }}</p>
+          </div>
+          <div class="flex items-center">
+            <strong class="text-gray-700 ml-2">Date:</strong>
+            <p class="text-gray-700 ml-2">{{ event.date }}</p>
+            <strong class="text-gray-700 ml-2 px-4">Time:</strong>
+            <p class="text-gray-700 ml-2">{{ event.time }}</p>
+          </div>
+          <div class="mt-4">
+            <a href="{% url 'events:event_details' event.id %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm py-2 px-6 rounded-lg shadow transition-transform transform hover:scale-105">
+                Book Ticket
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-----Feedback-->
+<section>
+    <div class="container mx-auto p-8"> 
+        <h2 class="text-2xl font-bold mb-6 text-center">Participant Feedback Form</h2>
+        <div class="space-y-4"> 
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Presenter/Speaker</h3>
+            <label for="presenterRating" class="block text-sm font-medium text-gray-700">Rating:</label>
+            <select id="presenterRating" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+            <label for="presenterComments" class="block text-sm font-medium text-gray-700 mt-2">Comments:</label>
+            <textarea id="presenterComments" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+      
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Content</h3>
+            <label for="contentRating" class="block text-sm font-medium text-gray-700">Rating:</label>
+            <select id="contentRating" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+            <label for="contentComments" class="block text-sm font-medium text-gray-700 mt-2">Comments:</label>
+            <textarea id="contentComments" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+      
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Organization & Flow</h3>
+            <label for="organizationRating" class="block text-sm font-medium text-gray-700">Rating:</label>
+            <select id="organizationRating" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+            <label for="organizationComments" class="block text-sm font-medium text-gray-700 mt-2">Comments:</label>
+            <textarea id="organizationComments" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+      
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Visual Aids</h3>
+            <label for="visualAidsRating" class="block text-sm font-medium text-gray-700">Rating:</label>
+            <select id="visualAidsRating" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+            <label for="visualAidsComments" class="block text-sm font-medium text-gray-700 mt-2">Comments:</label>
+            <textarea id="visualAidsComments" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+      
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Overall Experience</h3>
+            <label for="overallRating" class="block text-sm font-medium text-gray-700">Rating:</label>
+            <select id="overallRating" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Poor</option>
+            </select>
+            <label for="overallComments" class="block text-sm font-medium text-gray-700 mt-2">Comments:</label>
+            <textarea id="overallComments" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+          </div>
+        <button type="submit" class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Submit Feedback</button>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="bg-blue-500 text-white py-12">
+  <div class="container mx-auto text-center">
+    <p>&copy; 2025 Event Management System. All Rights Reserved.</p>
+    <p class="mt-2">
+      Follow us on: <a href="#" class="hover:underline">Facebook</a> |
+      <a href="#" class="hover:underline">Twitter</a> |
+      <a href="#" class="hover:underline">Instagram</a>
+    </p>
+  </div>
+</footer>
+
+{% endblock %}

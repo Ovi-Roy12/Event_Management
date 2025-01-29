@@ -1,0 +1,23 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<div class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white shadow rounded-lg p-6">
+        <h2 class="text-xl font-semibold">Update Event</h2>
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            <input type="text" name="name" value="{{ event.name }}" class="w-full p-2 border border-gray-300 rounded-lg">
+            <textarea name="description" class="w-full p-2 border border-gray-300 rounded-lg">{{ event.description }}</textarea>
+            <input type="date" name="date" value="{{ event.date }}" class="w-full p-2 border border-gray-300 rounded-lg">
+            <input type="time" name="time" value="{{ event.time }}" class="w-full p-2 border border-gray-300 rounded-lg">
+            <input type="text" name="location" value="{{ event.location }}" class="w-full p-2 border border-gray-300 rounded-lg">
+            <select name="category" class="w-full p-2 border border-gray-300 rounded-lg">
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category == event.category %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="file" name="image" class="w-full p-2 border border-gray-300 rounded-lg">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Update Event</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

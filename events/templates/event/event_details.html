@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-8">
+    <!-- Page Header -->
+    <h2 class="text-3xl font-bold text-center text-blue-600 mb-8">Event Details</h2>
+
+    <!-- Event Card -->
+    <div class="rounded-lg shadow-lg bg-white overflow-hidden">
+        <!-- Event Image -->
+        <img src="{{ event.image.url }}" class="w-full h-64 object-cover" alt="{{ event.name }}">
+
+        <!-- Event Details -->
+        <div class="p-6 space-y-4">
+            <!-- Event Name -->
+            <h3 class="text-2xl font-bold text-gray-800">{{ event.name }}</h3>
+
+            <!-- Event Description -->
+            <p class="text-gray-600 leading-relaxed">{{ event.description }}</p>
+
+            <!-- Event Location -->
+            <div class="flex items-center">
+                <svg class="h-5 w-5 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657a8 8 0 10-11.314 0L12 21l5.657-4.343z" />
+                </svg>
+                <p class="text-gray-700"><strong>Location:</strong> {{ event.location }}</p>
+            </div>
+
+            <!-- Event Date and Time -->
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-6 9h6m-7 6h8a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h3z" />
+                    </svg>
+                    <p class="text-gray-700"><strong>Date:</strong> {{ event.date }}</p>
+                </div>
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10h1m4 0h-1m-4 0h-1m1-4v1m0 4v1m0 4v1m0-12a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <p class="text-gray-700"><strong>Time:</strong> {{ event.time }}</p>
+                </div>
+            </div>
+
+            <!-- Book Ticket Button -->
+            <div class="text-center mt-6">
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                    Book Ticket
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
