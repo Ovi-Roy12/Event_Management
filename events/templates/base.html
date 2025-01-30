@@ -30,11 +30,11 @@
         <!-- Buttons -->
         <div id="nav-buttons" class="hidden md:flex space-x-4">
           <a
-            href="#"
+            href="{% url 'users:login' %}"
             class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200"
             >Login</a
           >
-          <a href="#" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
+          <a href="{% url 'users:register' %}" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
             >Register</a
           >
         </div>

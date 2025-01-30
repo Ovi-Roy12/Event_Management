@@ -1,6 +1,6 @@
 # Import the dj-database-url package at the beginning of the file
 import dj_database_url
-
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,13 +11,13 @@ MEDIA_URL = '/media/'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d0=9^k6v@*qkh-)1!(9@bx#hks4wcn8x!9mhae=iiwi=ot!okw'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['event-management-9708.onrender.com','127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com','http://127.0.0.1:8000']
+# ALLOWED_HOSTS = ['event-management-9708.onrender.com','127.0.0.1']
+# CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com','http://127.0.0.1:8000']
 
 
 # Application definition
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
+    'users',
     'tailwind',
     'theme',
 ]
@@ -79,26 +80,26 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event_management',
-#         'USER': 'postgres',
-#         'PASSWORD': 'pgadmin25586',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('NAME'),
+        'USER': config('postgres'),
+        'PASSWORD': config('pgadmin25586'),
+        'HOST': config('localhost'),
+        'PORT': config('5432'),
+    }
+}
 
 # Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://event_manager_db_ynx1_user:T2IHEWZ7qN4aHPvaCsIGMQuoNdiK0Txf@dpg-cuct6bhopnds73aljjmg-a.oregon-postgres.render.com/event_manager_db_ynx1',
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://event_manager_db_ynx1_user:T2IHEWZ7qN4aHPvaCsIGMQuoNdiK0Txf@dpg-cuct6bhopnds73aljjmg-a.oregon-postgres.render.com/event_manager_db_ynx1',
+#         conn_max_age=600
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
