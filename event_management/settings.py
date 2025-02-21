@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
+SECRET_KEY = config('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -94,7 +95,7 @@ DATABASES = {
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        'PORT': config('PORT', cast=int),
     }
 }
 
