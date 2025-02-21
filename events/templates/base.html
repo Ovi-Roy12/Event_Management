@@ -4,98 +4,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Management</title>
+    <title>{%block title %}Event Management{% endblock %}</title>
     {% tailwind_css %}
   </head>
   <body>
-    <!-- Navigation Bar -->
-    <nav class="bg-blue-600 text-white">
-      <div
-        class="container mx-auto px-4 py-4 flex justify-between items-center"
-      >
-        <!-- Logo -->
-        <a href="#" class="text-2xl font-bold hover:text-blue-300"
-          >EventManager</a
-        >
-
-        <!-- Links -->
-        <div id="nav-links" class="hidden md:flex space-x-6">
-          <a href="{% url 'events:home' %}">Home</a>
-          <a href="{% url 'events:event_list' %}">Events</a>
-          <a href="{% url 'events:dashboard' %}">Dashboard</a>
-          <a href="#" class="hover:text-blue-300">About Us</a>
-          <a href="#" class="hover:text-blue-300">Contact</a>
-        </div>
-
-        <!-- Buttons -->
-        <div id="nav-buttons" class="hidden md:flex space-x-4">
-          <a
-            href="{% url 'users:login' %}"
-            class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200"
-            >Login</a
-          >
-          <a href="{% url 'users:register' %}" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
-            >Register</a
-          >
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden text-white focus:outline-none" id="menu-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div
-        id="mobile-menu"
-        class="hidden bg-blue-600 w-full py-4 text-center space-y-2"
-      >
-        <a href="#" class="block py-2 hover:bg-blue-700">Home</a>
-        <a href="#" class="block py-2 hover:bg-blue-700">Events</a>
-        <a href="#" class="block py-2 hover:bg-blue-700">About Us</a>
-        <a href="#" class="block py-2 hover:bg-blue-700">Contact</a>
-        <div class="space-y-2 mt-4">
-          <a
-            href="#"
-            class="block bg-white text-blue-600 px-4 py-2 mx-4 rounded hover:bg-gray-200"
-            >Login</a
-          >
-          <a
-            href="#"
-            class="block bg-blue-500 px-4 py-2 mx-4 rounded hover:bg-blue-700"
-            >Register</a
-          >
-        </div>
-      </div>
-    </nav>
-    <!-- JavaScript -->
-    <script>
-      document
-        .getElementById("menu-btn")
-        .addEventListener("click", function () {
-          const mobileMenu = document.getElementById("mobile-menu");
-          mobileMenu.classList.toggle("hidden");
-        });
-    </script>
-
+    
     <!-- Main Content -->
     <main>
       {% block content %}{% endblock %}
     </main>
-
 
   </body>
 </html>

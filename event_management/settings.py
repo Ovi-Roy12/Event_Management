@@ -34,6 +34,13 @@ INSTALLED_APPS = [
     'theme',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  
+]
+LOGIN_REDIRECT_URL = "home"  
+LOGOUT_REDIRECT_URL = "users:login"
+
+
 TAILWIND_APP_NAME = 'theme'
 NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
 
@@ -103,6 +110,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

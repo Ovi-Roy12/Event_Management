@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{%include 'navbar.html'%}
 <div class="container mx-auto p-8 bg-gray-100">
     <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Event List</h2>
 
@@ -52,4 +54,5 @@
         </ul>
     </div>
 </div>
+{%include 'footer.html'%}
 {% endblock %}

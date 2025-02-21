@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load static %} 
+{% block content %}
+{%include 'navbar.html'%}
+<h2>My RSVP'd Events</h2>
+<ul>
+  {% for event in rsvp_events %}
+    <li>{{ event.name }} - {{ event.date }} at {{ event.time }}</li>
+  {% empty %}
+    <p>You haven't RSVP'd for any events yet.</p>
+  {% endfor %}
+</ul>
+{% endblock %}

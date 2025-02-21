@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+<!---Navbar-->
+{%include 'navbar.html'%}
 <!-- Hero Section -->
 <section class="relative bg-blue-500 text-white h-screen">
   <div class="absolute inset-0">
@@ -169,20 +171,16 @@
     </div>
 </section>
 
-
+{% if messages %}
+    <script>
+        window.onload = function() {
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        };
+    </script>
+{% endif %}
 
 <!-- Footer -->
-  <footer class="bg-blue-500 text-white py-12">
-    <div class="container mx-auto text-center">
-      <p>&copy; 2025 Event Management System. All Rights Reserved.</p>
-      <p class="mt-2">
-        Follow us on: <a href="#" class="hover:underline">Facebook</a> |
-        <a href="#" class="hover:underline">Twitter</a> |
-        <a href="#" class="hover:underline">Instagram</a>
-      </p>
-    </div>
-  </footer>
-
-
-
+{%include 'footer.html'%}
 {% endblock %}

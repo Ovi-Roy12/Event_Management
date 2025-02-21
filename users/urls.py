@@ -3,7 +3,8 @@ from users import views
 
 app_name = 'users'
 
-urlpatterns =[
+urlpatterns = [
     path('register/', views.register, name='register'),
-     path('login/', views.login, name='login'),
+    path('login/', views.login_view, name='login'),  
+    path('logout/', views.logout_view, name='logout'), 
 ]
