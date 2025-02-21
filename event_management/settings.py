@@ -88,8 +88,6 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  
 
 SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 DATABASES = {
