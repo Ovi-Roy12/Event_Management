@@ -2,7 +2,6 @@
 import dj_database_url
 from decouple import config
 from pathlib import Path
-import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -96,9 +95,9 @@ SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
+        'NAME': config('NAME', default='event_management'),
+        'USER': config('USER', default='postgres'),
+        'PASSWORD': config('PASSWORD', default=''),
         'HOST': config('HOST', default='localhost'),
         'PORT': config('PORT', default='5432'),
     }
