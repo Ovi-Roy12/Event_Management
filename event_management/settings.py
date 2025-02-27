@@ -1,6 +1,5 @@
 # Import the dj-database-url package at the beginning of the file
 import dj_database_url
-from decouple import config
 from pathlib import Path
 import os
 
@@ -11,8 +10,6 @@ MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
