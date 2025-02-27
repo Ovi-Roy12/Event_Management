@@ -1,22 +1,19 @@
-# Import the dj-database-url package at the beginning of the file
 import dj_database_url
 from pathlib import Path
 import os
+from decouple import config  
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-MEDIA_ROOT = BASE_DIR = Path(__file__).resolve().parent.parent
+# Build paths inside the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# Security settings
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY')  # Load from .env file
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# ALLOWED_HOSTS = ['event-management-9708.onrender.com','127.0.0.1']
-# CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com','http://127.0.0.1:8000']
-
+ALLOWED_HOSTS = ['event-management-9708.onrender.com', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://event-management-9708.onrender.com', 'http://127.0.0.1:8000']
 
 # Application definition
 INSTALLED_APPS = [
@@ -38,10 +35,8 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = "home"  
 LOGOUT_REDIRECT_URL = "users:login"
 
-
 TAILWIND_APP_NAME = 'theme'
 NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 INTERNAL_IPS = ['127.0.0.1']
 
 ROOT_URLCONF = 'event_management.urls'
@@ -74,81 +70,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'event_management.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-SECRET_KEY = 'django-insecure-d0=9^k6v@*qkh-)1!(9@bx#hks4wcn8x!9mhae=iiwi=ot!okw'  # Replace with a strong, generated key in production!
-
+# Database configuration for Render
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'event_management',
-        'USER': 'postgres',
-        'PASSWORD': 'pgadmin25586',  # Replace with a strong password in production!
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=config("DATABASE_URL"),
+        conn_max_age=600
+    )
 }
 
-# Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://event_manager_db_ynx1_user:T2IHEWZ7qN4aHPvaCsIGMQuoNdiK0Txf@dpg-cuct6bhopnds73aljjmg-a.oregon-postgres.render.com/event_manager_db_ynx1',
-#         conn_max_age=600
-#     )
-# }
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# Static files
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
