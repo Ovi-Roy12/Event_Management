@@ -15,10 +15,10 @@ MEDIA_URL = '/media/'
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default=True,cast=bool)
 
-# ALLOWED_HOSTS = ['event-management-9708.onrender.com','127.0.0.1']
-# CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com','http://127.0.0.1:8000']
+ALLOWED_HOSTS = ['event-management-9708.onrender.com','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com','http://127.0.0.1:8000']
 
 
 # Application definition
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'users',
     'tailwind',
     'theme',
+    'decouple',
 ]
 
 AUTHENTICATION_BACKENDS = [
