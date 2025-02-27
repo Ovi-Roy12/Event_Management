@@ -88,16 +88,14 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
-
-SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME', default='event_management'),
-        'USER': config('USER', default='postgres'),
-        'PASSWORD': config('PASSWORD', default=''),
-        'HOST': config('HOST', default='localhost'),
-        'PORT': config('PORT', default='5432'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
     }
 }
 
@@ -105,7 +103,6 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
 #         default='postgresql://event_manager_db_ynx1_user:T2IHEWZ7qN4aHPvaCsIGMQuoNdiK0Txf@dpg-cuct6bhopnds73aljjmg-a.oregon-postgres.render.com/event_manager_db_ynx1',
 #         conn_max_age=600
 #     )
