@@ -85,14 +85,16 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
+SECRET_KEY = 'django-insecure-d0=9^k6v@*qkh-)1!(9@bx#hks4wcn8x!9mhae=iiwi=ot!okw'  # Replace with a strong, generated key in production!
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        'NAME': 'event_management',
+        'USER': 'postgres',
+        'PASSWORD': 'pgadmin25586',  # Replace with a strong password in production!
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
