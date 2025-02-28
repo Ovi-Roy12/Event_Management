@@ -1,11 +1,8 @@
 import os
 from pathlib import Path
 import dj_database_url
-from dotenv import load_dotenv
 from decouple import config
 
-# Load environment variables
-load_dotenv()
 
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,24 +79,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'event_management.wsgi.application'
 
-# Database configuration
-DATABASE_URL = config('DATABASE_URL', default=None)
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': config('NAME'),
+#             'USER': config('USER'),
+#             'PASSWORD': config('PASSWORD'),
+#             'HOST': config('HOST'),
+#             'PORT': config('PORT'),
+#     }
+#  }
 
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(default=DATABASE_URL)
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('NAME'),
-            'USER': config('USER'),
-            'PASSWORD': config('PASSWORD'),
-            'HOST': config('HOST'),
-            'PORT': config('PORT'),
-        }
-    }
+# Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://event_manager_db_k28x_user:eYEsp0iKzDUkCiw3U0KSBZqelYrfz5Sa@dpg-cv0m52lumphs739r7jbg-a.oregon-postgres.render.com/event_manager_db_k28x',
+        conn_max_age=600,
+    )
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
