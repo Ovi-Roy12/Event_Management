@@ -3,7 +3,6 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 
-
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,10 +12,21 @@ MEDIA_URL = '/media/'
 
 # Security settings
 SECRET_KEY = config('SECRET_KEY')
+
+# Ensure DEBUG is set correctly
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['event-management-9708.onrender.com', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'http://127.0.0.1:8000']
+ALLOWED_HOSTS = [
+    'event-management-9708.onrender.com',
+    '127.0.0.1',
+    'dpg-cv0m52lumphs739r7jbg-a.oregon-postgres.render.com'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'http://127.0.0.1:8000',
+    'https://dpg-cv0m52lumphs739r7jbg-a.oregon-postgres.render.com'
+]
 
 # Installed applications
 INSTALLED_APPS = [
@@ -79,22 +89,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'event_management.wsgi.application'
 
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('NAME'),
-#             'USER': config('USER'),
-#             'PASSWORD': config('PASSWORD'),
-#             'HOST': config('HOST'),
-#             'PORT': config('PORT'),
-#     }
-#  }
-
-# Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Database Configuration Using Environment Variables
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://event_manager_db_k28x_user:eYEsp0iKzDUkCiw3U0KSBZqelYrfz5Sa@dpg-cv0m52lumphs739r7jbg-a.oregon-postgres.render.com/event_manager_db_k28x',
+        default=config('DATABASE_URL'),
         conn_max_age=600,
     )
 }
